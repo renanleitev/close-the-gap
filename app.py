@@ -39,8 +39,8 @@ input_model = st.sidebar.selectbox(
     (list_ia),
      index=list_ia.index(model_ia)
 )
-input_tokens = str(st.sidebar.number_input("Tokens", value=max_tokens))
-input_temperature = str(st.sidebar.number_input("Temperatura", value=temperature))
+input_tokens = int(st.sidebar.number_input("Tokens", value=max_tokens))
+input_temperature = float(st.sidebar.number_input("Temperatura", value=temperature))
 save_config_btn = st.sidebar.button("Salvar", use_container_width=True)
 reset_config_btn = st.sidebar.button("Redefinir", use_container_width=True)
 
