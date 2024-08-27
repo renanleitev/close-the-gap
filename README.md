@@ -24,6 +24,36 @@ colaborador em uma plataforma interna.
 6. **Treinamento Interativo**: Utilize plataformas de e-learning gamificadas para treinar os colaboradores sobre como centralizar e padronizar documentos. Inclua quizzes, vídeos interativos e simulações.
 7. **Histórias e Narrativas**: Crie uma narrativa envolvente onde os colaboradores são “heróis” em uma missão para organizar e padronizar os documentos da empresa. Isso pode tornar o processo mais divertido e significativo.
 
+## Pré-requisitos:
+
+- Python: https://www.python.org/downloads/
+- PiP: https://pip.pypa.io/en/stable/installation/
+- Groq: https://console.groq.com/docs/quickstart
+
+## Instalação
+
+### Criar um arquivo .env na raiz do projeto e adicionar sua chave de API Groq (igual ao .env.example):
+
+    GROQ_API_KEY=gsk_API_KEY
+
+### Executar o comando abaixo no seu terminal:
+
+    pip install -r requirements.txt
+
+### Executar o aplicativo Streamlit no seu terminal:
+
+     streamlit run app.py
+
+### Copiar o endereço URL abaixo e abrir no navegador:
+
+    http://localhost:8501/
+
+## Ferramentas
+
+- [Streamlit](https://streamlit.io/): Streamlit transforma scripts de dados em aplicativos web compartilháveis ​​em minutos. Tudo em Python puro. Não é necessária experiência de front-end.
+- [Groq](https://groq.com/): Groq é uma inferência de IA rápida, alimentada pela tecnologia de inferência de IA LPU™ que oferece IA rápida, acessível e com eficiência energética.
+- [youtube-transcript-api](https://pypi.org/project/youtube-transcript-api/): API python que permite obter transcrições/legendas de um determinado vídeo do YouTube. 
+
 ## Equipe
 
 - Flávio Raposo
