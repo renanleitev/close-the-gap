@@ -42,20 +42,9 @@ input_model = st.sidebar.selectbox(
 input_tokens = int(st.sidebar.number_input("Tokens", value=max_tokens))
 input_temperature = float(st.sidebar.number_input("Temperatura", value=temperature))
 save_config_btn = st.sidebar.button("Salvar", use_container_width=True)
-reset_config_btn = st.sidebar.button("Redefinir", use_container_width=True)
 
 if save_config_btn:
-  model_ia = input_model
-  max_tokens = input_tokens
-  temperature = input_temperature
   st.sidebar.success("Configurações salvas com sucesso.")
-
-if reset_config_btn:
-  model_ia = "llama-3.1-70b-versatile"
-  max_tokens = 1000
-  temperature = 0.7
-  st.sidebar.success("Configurações redefinidas com sucesso.")
-
 
 with st.form("my_form"):
   # Input for YouTube Video ID
@@ -91,9 +80,9 @@ with st.form("my_form"):
                     "content": f'{text_input}, responda em markdown e sempre transcreva a resposta para Português do Brasil: {full_transcript}',
                 }
             ],
-            model=model_ia,
-            max_tokens=max_tokens,
-            temperature=temperature
+            model=input_model,
+            max_tokens=input_tokens,
+            temperature=input_temperature
           )
 
           response = chat_completion.choices[0].message.content
