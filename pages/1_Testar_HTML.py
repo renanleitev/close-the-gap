@@ -9,4 +9,8 @@ with col1:
   html_code = st.text_area("Copie e cole o seu código HTML para fazer edições e testar em tempo real", height=500)
 
 with col2:
-  st.html(html_code)
+  # Para exibir o HTML com fundo branco
+  st.markdown("""
+    <style>iframe {background-color: white;}</style>
+  """, unsafe_allow_html=True)
+  st.components.v1.html(html_code, scrolling=True, height=600)
