@@ -42,7 +42,7 @@ colaborador em uma plataforma interna.
 
 ### Executar o aplicativo Streamlit no seu terminal:
 
-     streamlit run app.py
+     streamlit run Home.py
 
 ### Copiar o endereço URL abaixo e abrir no navegador:
 

@@ -7,6 +7,11 @@ from dotenv import load_dotenv
 # Carregando as variáveis de ambiente
 load_dotenv()
 
+# Configurando a página
+st.set_page_config(
+    page_title="Close The Gap",
+)
+
 # Configurando a IA
 # https://console.groq.com/settings/limits
 
@@ -86,7 +91,7 @@ with st.form("my_form"):
           )
 
           response = chat_completion.choices[0].message.content
-          st.subheader('Resumo:')
+          st.subheader('Resposta:')
           st.markdown(response)
       except Exception as e:
         st.error(f'Aconteceu um erro: {e}')
