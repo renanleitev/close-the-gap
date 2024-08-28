@@ -1,5 +1,6 @@
 import streamlit as st
 from utils import call_ai
+from utils import format_code
 
 st.set_page_config(page_title="Gerar", layout="wide")
 
@@ -23,4 +24,4 @@ if st.button("Enviar"):
     st.markdown(str(response))
 
   with col2:
-    st.html(str(response))
+    format_code.html(str(response))
