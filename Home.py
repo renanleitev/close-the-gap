@@ -1,6 +1,4 @@
 import streamlit as st
-from youtube_transcript_api import YouTubeTranscriptApi
-import os
 from utils import call_ai
 
 # Configurando a página
@@ -14,32 +12,29 @@ st.write('Plataforma de ensino que permite gerar aulas e resumos usando Intelig�
 
 input_model, input_tokens, input_temperature = call_ai.sidebar()
 
-with st.form("my_form"):
-  # Input for YouTube Video ID
-  video_URL = st.text_input('Digite a URL do vídeo do YouTube:', '')
-  text_input = st.text_input('Escreva a sua pergunta:', '')
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-  submitted = st.form_submit_button("Enviar")
+# Display chat messages from history on app rerun
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
 
-  video_id = ''
+# React to user input
+if prompt := st.chat_input("Mensagem"):
+    try:
+      # Display user message in chat message container
+      st.chat_message("user", avatar="🤓").markdown(prompt)
+      # Add user message to chat history
+      st.session_state.messages.append({"role": "user", "content": prompt})
 
-  if video_URL:
-    video_id = video_URL.split("https://www.youtube.com/watch?v=")[1]
-
-  if submitted and video_id and text_input:
-      try:
-          # Obtendo a transcrição do vídeo
-          transcript_list = YouTubeTranscriptApi.get_transcript(video_id, languages=['pt-br', 'en'])
-          full_transcript = " ".join([t['text'] for t in transcript_list])
-
-          response = call_ai.run(input_model, 
-                                input_tokens, 
-                                input_temperature, 
-                                text_input, 
-                                full_transcript,
-                                'responda em markdown e sempre transcreva a resposta para Português do Brasil')
-
-          st.subheader('Resposta:')
-          st.markdown(response)
-      except Exception as e:
-        st.error(f'Aconteceu um erro: {e}')
+      # Display assistant response in chat message container
+      with st.chat_message("assistant", avatar="🤖"):
+        with st.spinner('Carregando...'):
+            response_ai = call_ai.run(input_model, input_tokens, input_temperature, prompt)
+            response_stream = st.write_stream(call_ai.response_generator(response_ai))
+      # Add assistant response to chat history
+      st.session_state.messages.append({"role": "assistant", "content": response_ai})
+    except Exception as e:
+      st.error(f'Aconteceu um erro: {e}')

@@ -2,6 +2,7 @@ import streamlit as st
 from groq import Groq
 import os
 from dotenv import load_dotenv
+import time
 
 # Carregando variáveis de ambiente
 load_dotenv()
@@ -41,10 +42,12 @@ def sidebar():
 
   return input_model, input_tokens, input_temperature
 
-def run(input_model, input_tokens, input_temperature, text_input, content, message):
+default_message = 'responda em markdown e sempre transcreva a resposta para Português do Brasil'
+
+def run(input_model, input_tokens, input_temperature, text_input, content = '', message = default_message):
   response = ''
 
-  if text_input and content:
+  if text_input:
     # Connect to the GROQ API
     client = Groq(
       api_key=os.environ.get("GROQ_API_KEY"),
@@ -65,3 +68,9 @@ def run(input_model, input_tokens, input_temperature, text_input, content, messa
     response = chat_completion.choices[0].message.content
 
   return response
+
+# Streamed response emulator
+def response_generator(response):
+  for word in response.split(" "):
+    yield word + " "
+    time.sleep(0.02)
