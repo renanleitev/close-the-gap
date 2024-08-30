@@ -24,7 +24,7 @@ if st.button("Enviar"):
   response_edited = response.removeprefix('```html').removesuffix('```')
   
   with col1:
-    st.markdown(f"```html {response_edited }```")
+    st.markdown(f"```html{response_edited }```")
 
   with col2:
     format_code.html(str(response_edited))
