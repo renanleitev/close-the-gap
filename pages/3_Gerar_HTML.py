@@ -16,12 +16,15 @@ if st.button("Enviar"):
                         input_temperature, 
                         text_input, 
                         html_code,
-                        'responda apenas em markdown, sem comentários')
+                        'responda apenas em código HTML, sem comentários')
 
   col1, col2 = st.columns(2, gap="large")
 
+  # Para limpar o markdown caso venha com isso na resposta
+  response_edited = response.removeprefix('```html').removesuffix('```')
+  
   with col1:
-    st.markdown(str(response))
+    st.markdown(f"```html {response_edited }```")
 
   with col2:
-    format_code.html(str(response))
+    format_code.html(str(response_edited))
